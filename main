@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+int main() {
+	int menu;
+	int a = 10000, k = 2;
+	int random, go = 1;
+	char c[30];
+	int bet, all = 0, win = 0, lose = 0, no = 0;;
+	while (k == 2) {
+		printf("메뉴를 선택하세요\n 1.게임하기\n 2.통계보기\n");
+		scanf("%d", &menu);
+		if (menu == 1) {
+			while (go == 1) {
+				printf("현재 보유 머니는 %d원 입니다\n", a);
+				printf("배팅 금액을 입력하세요:\n");
+				scanf("%d", &bet);
+        while (bet > a) {
+					printf("보유금액 이상을 베팅하셨습니다\n");
+					printf("배팅 금액을 입력하세요:");
+					scanf("%d", &bet);
+				}
+
+		    random = rand() % 3;
+				printf("가위,바위,보중 하나를 입력하세요:");
+				scanf("%s", c);
+				if (random == 0) {
+					printf("승리하였습니다\n");
+
+					win = win + 1;
+					all = all + 1;
+					a = a + bet;
+				}
+				if (random == 1) {
+					printf("비겼습니다\n");
+					all = all + 1;
+					no = no + 1;
+				}
+				if (random == 2) {
+					printf("패배하였습니다\n");
+					all = all + 1;
+					lose = lose + 1;
+					a = a - bet;
+				}
+				printf("다시 플레이하려면 1번, 메뉴로 돌아가려면 2번\n");
+				scanf("%d", &go);
+			}
+		}
+		if (menu == 2) {
+			float rate;
+			char kk[23];
+			rate = win * 100/ all;
+			printf("승률:%.2f\n", rate);
+			printf("승리:%d\n", win);
+			printf("패배:%d\n", lose);
+			printf("무승부:%d\n", no);
+			printf("메뉴로 돌아가려면 아무키나 입력:");
+			scanf("%s", kk);
+			menu = 1;
+		}
